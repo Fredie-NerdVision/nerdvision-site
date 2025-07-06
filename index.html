@@ -1,11 +1,222 @@
 <!DOCTYPE html>
-<html long="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>NerdVision | Approachable Tech Solutions</title>
-    </head>
-    <body>
+<!-- I'm setting the language to English and enabling smooth scrolling for the whole page. -->
+<html lang="en" class="scroll-smooth">
+<head>
+    <!-- Basic meta tags for character set and responsive design. -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NerdVision | Approachable Tech Solutions</title>
+
+    <!-- External Libraries: Tailwind for styling and Google Fonts for our custom typography. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@700;900&family=Roboto+Mono:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- This is the link to my custom stylesheet where I'll keep all my unique brand styles. -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="antialiased">
+    <!-- This canvas is for the background animation. I've placed it first so it sits behind everything else. -->
+    <!-- The 'pointer-events-none' class is crucial to ensure this canvas doesn't block clicks on the content below. -->
+    <canvas id="hero-canvas" class="fixed top-0 left-0 w-full h-full z-0 pointer-events-none"></canvas>
+    
+    <!-- This div wraps all the visible content and uses a relative z-index to ensure it sits on top of the canvas. -->
+    <div class="relative z-10">
+        <!-- HEADER SECTION: This will be my sticky navigation bar. -->
+        <header class="bg-white/80 backdrop-blur-sm fixed top-0 left-0 right-0 z-50 border-b border-gray-200/80">
+            <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+                <a href="#home" class="flex items-center gap-3">
+                    <img src="fulllogo_transparent_nobuffer.png" alt="NerdVision Logo" class="h-10">
+                </a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#services" class="nav-link text-base font-medium text-gray-600">Services</a>
+                    <a href="#portfolio" class="nav-link text-base font-medium text-gray-600">Portfolio</a>
+                    <a href="#about" class="nav-link text-base font-medium text-gray-600">About</a>
+                </div>
+                <a href="#contact" class="hidden md:inline-block btn-primary py-2 px-6 text-sm">Get In Touch</a>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-800 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+                </div>
+            </nav>
+            <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur-sm">
+                <a href="#services" class="block text-center py-3 px-4 text-sm hover:bg-gray-100">Services</a>
+                <a href="#portfolio" class="block text-center py-3 px-4 text-sm hover:bg-gray-100">Portfolio</a>
+                <a href="#about" class="block text-center py-3 px-4 text-sm hover:bg-gray-100">About</a>
+                <a href="#contact" class="block text-center py-3 px-4 text-sm hover:bg-gray-100">Contact</a>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT: This holds all the sections of my single-page site. -->
+        <main>
+            <!-- HERO SECTION: The first thing users see. -->
+            <section id="home" class="min-h-screen flex items-center pt-28 pb-10 relative overflow-hidden">
+                <div class="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-12 z-20">
+                    <div class="md:w-1/2 text-center md:text-left">
+                        <h1 class="font-display text-4xl lg:text-6xl font-black leading-tight text-gray-800">
+                            Web Development <span class="text-yellow-500">You Own</span> and <span class="text-cyan-500">Understand.</span>
+                        </h1>
+                        <p class="mt-4 text-lg text-gray-600 max-w-xl">We build high-performance websites and give you the keys. No confusing jargon, no endless subscriptions. Just a superior digital asset, fully yours.</p>
+                        <a href="#services" class="mt-8 inline-block btn-primary py-4 px-8 text-lg">View Packages</a>
+                    </div>
+                    <div class="md:w-1/2 flex justify-center items-center">
+                        <div class="relative w-full max-w-md h-80">
+                            <div class="absolute inset-0 bg-yellow-400/20 rounded-full blur-3xl"></div>
+                            <div class="relative w-full h-full card-light p-4 flex items-center justify-center bg-white/50 backdrop-blur-sm">
+                                <div id="hud-container" class="w-full h-full flex flex-col gap-2 font-mono text-xs p-2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SERVICES SECTION: Outlines the different packages I offer. -->
+            <section id="services" class="py-20 bg-white">
+                <div class="container mx-auto px-6 text-center">
+                    <h2 class="font-display text-3xl font-black text-gray-800 mb-2">Service Packages</h2>
+                    <p class="text-gray-600 mb-12 max-w-2xl mx-auto">Choose your deployment package. No hidden variables, just mission parameters.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <a href="launchpad.html" class="card-light p-8 text-left flex flex-col"><div class="h-16 w-16 mb-6 flex items-center justify-center bg-gray-100 rounded-xl"><span class="text-3xl">📄</span></div><h3 class="font-display text-2xl font-bold text-gray-800 mb-2">Launchpad</h3><div class="mb-4"><p class="text-sm font-medium text-gray-500">Starting at</p><p class="text-3xl font-bold text-gray-800">$1,500</p></div><p class="text-gray-500 mb-6 flex-grow">A single-page deployment to establish a digital footprint.</p><span class="mt-auto font-bold text-yellow-600">Learn More &rarr;</span></a>
+                        <a href="accelerator.html" class="card-light p-8 text-left border-2 border-yellow-400 flex flex-col"><div class="h-16 w-16 mb-6 flex items-center justify-center bg-yellow-100 rounded-xl"><span class="text-3xl">📅</span></div><h3 class="font-display text-2xl font-bold text-gray-800 mb-2">Accelerator</h3><div class="mb-4"><p class="text-sm font-medium text-gray-500">Starting at</p><p class="text-3xl font-bold text-gray-800">$2,500</p></div><p class="text-gray-500 mb-6 flex-grow">Integrated systems for transactions and scheduling.</p><span class="mt-auto font-bold text-yellow-600">Learn More &rarr;</span></a>
+                        <a href="supernova.html" class="card-light p-8 text-left flex flex-col"><div class="h-16 w-16 mb-6 flex items-center justify-center bg-cyan-100 rounded-xl"><span class="text-3xl">🚀</span></div><h3 class="font-display text-2xl font-bold text-gray-800 mb-2">Supernova</h3><div class="mb-4"><p class="text-sm font-medium text-gray-500">Starting at</p><p class="text-3xl font-bold text-gray-800">$4,000</p></div><p class="text-gray-500 mb-6 flex-grow">Full-stack solution with e-commerce and a client data vault.</p><span class="mt-auto font-bold text-yellow-600">Learn More &rarr;</span></a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RESPONSIVE SECTION: Highlights a key feature of my services. -->
+            <section id="responsive" class="py-24" style="background-color: var(--bg-dark); color: var(--text-light);">
+                <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-12 md:gap-20">
+                    <div class="md:w-1/2 flex justify-center items-center min-h-[400px]">
+                        <div class="device-container device-frame">
+                            <div class="device-screen">
+                                <div class="flex items-center gap-2 p-1 bg-white rounded-md shadow-sm">
+                                    <div class="w-4 h-4 rounded-full bg-cyan-400"></div>
+                                    <div class="w-1/2 h-2 rounded-full bg-gray-300"></div>
+                                </div>
+                                <div class="w-full h-1/4 bg-yellow-400/80 rounded-md mt-2"></div>
+                                <div class="h-2 w-5/6 mt-2 bg-gray-300 rounded-full"></div>
+                                <div class="h-2 w-full bg-gray-300 rounded-full"></div>
+                                <div class="h-2 w-2/3 bg-gray-300 rounded-full"></div>
+                                <div class="flex-grow"></div>
+                                <div class="h-4 w-full bg-gray-800 rounded-md"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2">
+                        <h2 class="font-display text-3xl font-black text-white mb-4">Looks Great on Every Device.</h2>
+                        <p class="text-gray-300 mb-4 text-lg">From phones and tablets to desktops, we build every website to be fully responsive. Your customers get a perfect experience, no matter how they find you.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- E-COMMERCE SECTION: Highlights another key feature. -->
+            <section id="ecommerce" class="py-24 bg-white">
+                <div class="container mx-auto px-6 flex flex-col md:flex-row-reverse items-center gap-12 md:gap-20">
+                    <div class="md:w-1/2 flex justify-center items-center">
+                        <div class="product-card w-64 bg-white p-4 rounded-2xl shadow-2xl border">
+                            <div class="w-full h-40 bg-yellow-100 rounded-lg flex items-center justify-center text-5xl">🌮</div>
+                            <h4 class="font-bold text-lg mt-4">Tasty Taco</h4>
+                            <p class="text-sm text-gray-500">$5.00</p>
+                            <button class="w-full mt-4 btn-primary py-2 px-4 text-sm flex items-center justify-center gap-2">
+                                <span class="cart-icon">🛒</span> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2">
+                        <h2 class="font-display text-3xl font-black text-gray-800 mb-4">Sell Online with Ease.</h2>
+                        <p class="text-gray-600 mb-4 text-lg">Our Accelerator and Supernova packages include everything you need to sell products or take online orders. We integrate secure payment systems and build intuitive interfaces that make buying simple for your customers.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PORTFOLIO SECTION: Shows off my past work. -->
+            <section id="portfolio" class="py-20 grid-bg">
+                <div class="container mx-auto px-6">
+                    <h2 class="font-display text-3xl font-black text-gray-800 text-center mb-2">Featured Projects</h2>
+                    <p class="text-gray-600 text-center mb-12 max-w-2xl mx-auto">Field-tested deployments for a diverse client roster.</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="group card-light"><div class="rounded-2xl overflow-hidden"><img src="https://placehold.co/400x300/FEE2E2/991B1B?text=La+Vida+Tacos" alt="Website design for La Vida Tacos restaurant" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"></div><div class="p-4"><h3 class="font-display text-lg font-bold text-gray-800">La Vida Tacos</h3><p class="font-mono text-xs text-cyan-600">[WordPress + WooCommerce]</p></div></div>
+                        <div class="group card-light"><div class="rounded-2xl overflow-hidden"><img src="https://placehold.co/400x300/FEF3C7/92400E?text=Tiny+Beans+Café" alt="Mobile website design for Tiny Beans Cafe" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"></div><div class="p-4"><h3 class="font-display text-lg font-bold text-gray-800">Tiny Beans Café</h3><p class="font-mono text-xs text-cyan-600">[HTML, CSS, JS]</p></div></div>
+                        <div class="group card-light"><div class="rounded-2xl overflow-hidden"><img src="https://placehold.co/400x300/DBEAFE/1E40AF?text=Sushi+Zen" alt="Booking system design for Sushi Zen" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"></div><div class="p-4"><h3 class="font-display text-lg font-bold text-gray-800">Sushi Zen</h3><p class="font-mono text-xs text-cyan-600">[React + Booking API]</p></div></div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- ABOUT SECTION: Builds trust with the user. -->
+            <section id="about" class="py-24" style="background-color: var(--bg-dark); color: var(--text-light);">
+                <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-12 md:gap-20">
+                    <div class="md:w-1/2 flex justify-center">
+                        <div class="w-64 h-64">
+                             <img src="icononly_transparent_nobuffer.png" alt="NerdVision company icon" class="w-full h-full">
+                        </div>
+                    </div>
+                    <div class="md:w-1/2">
+                        <h2 class="font-display text-3xl font-black text-white mb-4">The Team Behind the Code</h2>
+                        <p class="text-gray-300 mb-4 text-lg">Our mission is to provide transparent, high-quality web development that empowers you. We build your site, teach you how to use it, and then hand over the keys. It’s your business—you should own your website.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CONTACT SECTION: The main call to action. -->
+            <section id="contact" class="py-24 grid-bg">
+                <div class="container mx-auto px-6">
+                    <div class="max-w-xl mx-auto text-center">
+                        <h2 class="font-display text-3xl md:text-4xl font-black text-gray-800">Let's Build Together</h2>
+                        <p class="text-gray-600 mt-4 mb-8">Have a project in mind? Transmit your details and let's create something amazing.</p>
+                    </div>
+                    <form class="max-w-xl mx-auto mt-8">
+                        <div class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
+                                    <input type="text" id="name" class="input-field w-full" placeholder="Jane Doe" required>
+                                </div>
+                                <div>
+                                    <label for="business-name" class="block text-sm font-medium text-gray-700 mb-1">Business Name</label>
+                                    <input type="text" id="business-name" class="input-field w-full" placeholder="The Golden Spoon Bistro" required>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                                <input type="email" id="email" class="input-field w-full" placeholder="you@example.com" required>
+                            </div>
+                            <div>
+                                <label for="service" class="block text-sm font-medium text-gray-700 mb-1">Which service are you interested in?</label>
+                                <select id="service" class="input-field w-full">
+                                    <option>Not Sure Yet</option>
+                                    <option>Launchpad</option>
+                                    <option>Accelerator</option>
+                                    <option>Supernova</option>
+                                </select>
+                            </div>
+                             <div>
+                                <label for="website" class="block text-sm font-medium text-gray-700 mb-1">Existing Website (Optional)</label>
+                                <input type="url" id="website" class="input-field w-full" placeholder="https://example.com">
+                            </div>
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                                <textarea id="message" rows="4" class="input-field w-full" placeholder="Tell me about your project..." required></textarea>
+                            </div>
+                            <div>
+                                <button type="submit" class="w-full btn-primary py-3 text-lg">Send Message</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </main>
         
-    </body>
+        <!-- FOOTER SECTION: Standard copyright and final links. -->
+        <footer class="bg-white border-t border-gray-200">
+            <div class="container mx-auto px-6 py-6 text-center text-gray-500 text-sm">
+                <p>&copy; 2024 NERDVISION // All Rights Reserved</p>
+            </div>
+        </footer>
+    </div>
+    <!-- I link my JavaScript file at the very end of the body for performance. -->
+    <!-- This lets the browser render all the HTML content first, so the user sees the page faster. -->
+    <script src="scripts.js"></script>
+</body>
 </html>

@@ -1,0 +1,181 @@
+:root {
+    --bg-light: #F9FAFB;
+    --bg-dark: #4A443F; /* Brown from logo */
+    --text-light: #F9FAFB;
+    --text-dark: #3D3D3D; /* Darker brown for text */
+    --accent-yellow: #FFD740;
+    --accent-cyan: #4DD0E1;
+    --border-light: #E5E7EB;
+}
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+}
+.font-mono {
+    font-family: 'Roboto Mono', monospace;
+}
+.font-display {
+    font-family: 'Exo 2', sans-serif;
+}
+.btn-primary {
+    background-color: var(--accent-yellow);
+    color: var(--text-dark);
+    font-weight: 700;
+    border-radius: 9999px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+}
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 215, 64, 0.4);
+}
+.card-light {
+    background-color: white;
+    border: 1px solid var(--border-light);
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.04);
+    transition: all 0.3s ease;
+}
+.card-light:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 35px -5px rgba(0,0,0,0.08);
+}
+.grid-bg {
+    position: relative;
+    overflow: hidden;
+}
+.grid-bg::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(rgba(61, 61, 61, 0.05) 1px, transparent 1px),
+        linear-gradient(to right, rgba(61, 61, 61, 0.05) 1px, transparent 1px);
+    background-size: 4rem 4rem;
+    z-index: -1;
+}
+.input-field {
+    background-color: #FFFFFF;
+    border: 1px solid var(--border-light);
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.input-field:focus {
+    outline: none;
+    border-color: var(--accent-yellow);
+    box-shadow: 0 0 0 3px rgba(255, 215, 64, 0.4);
+}
+/* --- HUD Syntax Highlighting --- */
+.code-tag { color: #059669; } /* Green */
+.code-attr { color: #4f46e5; } /* Indigo */
+.code-string { color: #db2777; } /* Pink */
+.code-keyword { color: #d97706; } /* Amber */
+.code-function { color: #2563eb; } /* Blue */
+
+/* --- Accessibility: Visible Focus States --- */
+*:focus-visible {
+    outline: 3px solid var(--accent-cyan);
+    outline-offset: 2px;
+    border-radius: 0.25rem;
+}
+
+/* --- Animation Styles --- */
+.device-frame {
+    background-color: #3D3D3D;
+    border-radius: 1.5rem;
+    padding: 0.75rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    transition: all 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+.device-screen {
+    background-color: #F9FAFB;
+    border-radius: 1rem;
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    height: 100%;
+    overflow: hidden;
+}
+.device-container {
+    animation: cycle-devices 12s infinite ease-in-out;
+}
+@keyframes cycle-devices {
+    0%, 25% { width: 150px; height: 300px; }
+    33%, 58% { width: 300px; height: 225px; }
+    66%, 91% { width: 400px; height: 250px; }
+    100% { width: 150px; height: 300px; }
+}
+.product-card {
+    transition: transform 0.3s ease;
+}
+.product-card:hover {
+    transform: translateY(-10px);
+}
+.cart-icon {
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.product-card:hover .cart-icon {
+    transform: scale(1.2) rotate(-10deg);
+}
+
+/* --- Service Page Interactive Feature Styles --- */
+.feature-item {
+    transition: all 0.2s ease-in-out;
+}
+.feature-item.active, .feature-item:hover {
+    background-color: var(--accent-yellow);
+    color: var(--text-dark);
+    transform: translateX(10px);
+}
+.feature-item.active .feature-icon, .feature-item:hover .feature-icon {
+    background-color: white;
+    color: var(--accent-yellow);
+}
+#feature-display {
+    transition: opacity 0.3s ease-in-out;
+}
+.menu-item-add-btn {
+    background-color: var(--accent-yellow);
+    color: var(--text-dark);
+    transition: all 0.2s ease-in-out;
+}
+.menu-item-add-btn:hover {
+    background-color: #FFC107;
+    transform: scale(1.05);
+}
+.chart-btn.active {
+    background-color: var(--accent-yellow);
+    color: var(--text-dark);
+    font-weight: 700;
+}
+
+/* --- New Header Link Styles --- */
+.nav-link {
+    position: relative;
+    transition: color 0.3s ease;
+}
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--accent-yellow);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
+}
+.nav-link:hover {
+    color: var(--text-dark);
+}
+.nav-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
