@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Change the title for each project -->
+    <title>Project Case Study | NerdVision</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@700;900&family=Roboto+Mono:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- This links to your existing stylesheet to maintain brand consistency. -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="antialiased bg-gray-50">
+    <div class="relative z-10">
+        <!-- HEADER: This is the same consistent header from your other pages. -->
+        <header class="bg-white/80 backdrop-blur-sm fixed top-0 left-0 right-0 z-50 border-b border-gray-200/80">
+            <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+                <a href="index.html" class="flex items-center gap-3">
+                    <img src="fulllogo_transparent_nobuffer.png" alt="NerdVision Logo" class="h-10">
+                </a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html#services" class="nav-link text-base font-medium text-gray-600">Services</a>
+                    <a href="index.html#portfolio" class="nav-link text-base font-medium text-gray-600">Portfolio</a>
+                    <a href="index.html#about" class="nav-link text-base font-medium text-gray-600">About</a>
+                </div>
+                <a href="index.html#contact" class="hidden md:inline-block btn-primary py-2 px-6 text-sm">Get In Touch</a>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-800 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+                </div>
+            </nav>
+            <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur-sm">
+                <a href="index.html#services" class="block text-center py-3 px-4 text-sm hover:bg-gray-100">Services</a>
+                <a href="index.html#portfolio" class="block text-center py-3 px-4 text-sm hover:bg-gray-100">Portfolio</a>
+                <a href="index.html#about" class="block text-center py-3 px-4 text-sm hover:bg-gray-100">About</a>
+                <a href="index.html#contact" class="block text-center py-3 px-4 text-sm hover:bg-gray-100">Contact</a>
+            </div>
+        </header>
+
+        <main>
+            <!-- PROJECT HERO: Introduce the project and the client. -->
+            <section class="py-20 pt-32 text-center" style="background-color: var(--bg-dark); color: var(--text-light);">
+                <div class="container mx-auto px-6">
+                    <h1 class="font-display text-4xl lg:text-6xl font-black text-white">Project Title</h1>
+                    <p class="mt-4 text-lg text-gray-300 max-w-2xl mx-auto">A one-sentence summary of the project and its main goal.</p>
+                </div>
+            </section>
+
+            <!-- PROJECT SNAPSHOT SECTION -->
+            <section class="py-12 bg-white border-b border-gray-200">
+                <div class="container mx-auto px-6">
+                    <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                        <div>
+                            <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Client</h3>
+                            <p class="text-lg font-bold text-gray-800 mt-1">Client Name</p>
+                        </div>
+                        <div>
+                            <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Service Package</h3>
+                            <p class="text-lg font-bold text-cyan-600 mt-1">Accelerator</p>
+                        </div>
+                        <div>
+                            <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Timeline</h3>
+                            <p class="text-lg font-bold text-gray-800 mt-1">6 Weeks</p>
+                        </div>
+                        <div>
+                            <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Website</h3>
+                            <a href="#" target="_blank" class="text-lg font-bold text-gray-800 mt-1 hover:text-yellow-500 transition">View Live Site &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- FULL-WIDTH IMAGE: A big, beautiful hero shot of the final product. -->
+            <section class="py-12 bg-white">
+                 <div class="container mx-auto px-6">
+                    <div class="bg-gray-100 rounded-2xl shadow-lg overflow-hidden border">
+                        <img src="https://placehold.co/1200x800/E0E7FF/3730A3?text=Project+Hero+Screenshot" alt="Main project image" class="w-full">
+                    </div>
+                </div>
+            </section>
+
+            <!-- THE STORY SECTION: This is the core of your case study. -->
+            <section class="py-24 bg-white">
+                <div class="container mx-auto px-6">
+                    <div class="max-w-4xl mx-auto grid md:grid-cols-3 gap-x-12 gap-y-8">
+                        <div class="md:col-span-1">
+                            <h2 class="font-display text-2xl font-bold text-gray-800 mb-2">The Challenge</h2>
+                            <p class="text-gray-600">Start the story here. What problem was the client facing? Was their old site outdated, slow, or ineffective? Were they losing business? Be specific and concise.</p>
+                        </div>
+                        <div class="md:col-span-2">
+                            <h2 class="font-display text-2xl font-bold text-gray-800 mb-2">My Solution</h2>
+                            <div class="prose prose-lg max-w-none text-gray-700">
+                                <p>Describe how you solved the problem. What was your strategy? Did you build a custom theme, integrate a specific tool, or focus on performance? This is where you highlight your expertise and thought process.</p>
+                                <p>Talk about the collaboration. Explain how you worked with the client to bring their vision to life. This shows you're not just a coder, but a strategic partner.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VISUAL TRANSFORMATION SECTION -->
+            <section class="py-24 bg-gray-50">
+                <div class="container mx-auto px-6">
+                    <div class="text-center">
+                        <h2 class="font-display text-3xl font-bold text-gray-800">Visual Transformation</h2>
+                        <p class="mt-2 text-gray-600 max-w-2xl mx-auto">A complete redesign focused on modern aesthetics and user experience.</p>
+                    </div>
+                    <div class="max-w-5xl mx-auto mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div class="text-center">
+                            <h3 class="font-bold text-lg text-red-600 mb-2">BEFORE</h3>
+                            <div class="rounded-lg shadow-lg overflow-hidden border border-gray-200">
+                                <img src="https://placehold.co/600x400/FEE2E2/991B1B?text=Old+Website" alt="Before redesign">
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <h3 class="font-bold text-lg text-green-600 mb-2">AFTER</h3>
+                            <div class="rounded-lg shadow-lg overflow-hidden border border-gray-200">
+                                <img src="https://placehold.co/600x400/D1FAE5/047857?text=New+Website" alt="After redesign">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- THE RESULTS & TESTIMONIAL: The happy ending to your story. -->
+            <section class="py-24" style="background-color: var(--bg-dark); color: var(--text-light);">
+                <div class="container mx-auto px-6 text-center">
+                     <h2 class="font-display text-3xl font-black text-white">Mission Accomplished: The Results</h2>
+                     <div class="max-w-4xl mx-auto mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- Result Stat 1 -->
+                        <div class="bg-white/10 p-6 rounded-xl">
+                            <p class="font-display text-4xl font-bold text-yellow-400">40%</p>
+                            <p class="text-gray-300 mt-2">Increase in Online Orders</p>
+                        </div>
+                        <!-- Result Stat 2 -->
+                        <div class="bg-white/10 p-6 rounded-xl">
+                            <p class="font-display text-4xl font-bold text-yellow-400">55%</p>
+                            <p class="text-gray-300 mt-2">Faster Page Load Speed</p>
+                        </div>
+                        <!-- Result Stat 3 -->
+                        <div class="bg-white/10 p-6 rounded-xl">
+                            <p class="font-display text-4xl font-bold text-yellow-400">30%</p>
+                            <p class="text-gray-300 mt-2">Reduction in Bounce Rate</p>
+                        </div>
+                     </div>
+                     <!-- UPDATED TESTIMONIAL SECTION -->
+                     <div class="max-w-3xl mx-auto mt-16">
+                        <div class="bg-gray-800/50 p-8 rounded-2xl">
+                            <div class="flex flex-col sm:flex-row items-center gap-8 text-left">
+                                <img src="https://placehold.co/100x100/4A443F/FFD740?text=Client" alt="Client photo" class="w-24 h-24 rounded-full border-4 border-yellow-400 object-cover flex-shrink-0">
+                                <div>
+                                    <p class="text-xl italic text-gray-300">"This is where you'll put a glowing quote from your client. It should sound authentic and reinforce the value you provided."</p>
+                                    <p class="mt-4 font-bold text-white">- Happy Client, <span class="font-normal text-gray-400">CEO of Project, Inc.</span></p>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+            </section>
+            
+            <!-- FINAL CTA SECTION: Guide the user to get in touch or see more work. -->
+            <section class="py-24 bg-white">
+                <div class="container mx-auto px-6 text-center">
+                    <h2 class="font-display text-3xl md:text-4xl font-black text-gray-800">Ready to Start Your Project?</h2>
+                    <p class="text-gray-600 mt-4 mb-8 max-w-xl mx-auto">Let's work together to create a website that you own, understand, and that gets results for your business.</p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="index.html#contact" class="btn-primary py-3 px-8 text-lg">Get In Touch</a>
+                        <a href="index.html#portfolio" class="inline-block bg-gray-200 text-gray-800 font-bold rounded-full py-3 px-8 text-lg hover:bg-gray-300 transition">See Other Projects</a>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+        
+        <!-- FOOTER: Same footer for consistency. -->
+        <footer class="bg-white border-t border-gray-200">
+            <div class="container mx-auto px-6 py-6 text-center text-gray-500 text-sm">
+                <p>&copy; 2024 NERDVISION // All Rights Reserved</p>
+            </div>
+        </footer>
+    </div>
+    <!-- Link to your existing scripts file. -->
+    <script src="scripts.js"></script>
+</body>
+</html>

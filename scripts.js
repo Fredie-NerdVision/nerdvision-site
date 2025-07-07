@@ -10,17 +10,19 @@ if (mobileMenuButton) {
 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
-            mobileMenu.classList.add('hidden');
-        }
-        // We only want the part of the href before the '?', which is the ID of the section.
-        const targetID = this.getAttribute('href').split('?')[0];
-        const targetElement = document.querySelector(targetID);
-        if (targetElement) {
-            targetElement.scrollIntoView({
-                behavior: 'smooth'
-            });
+        // Only apply smooth scroll for on-page links.
+        // This prevents interference with links going to other pages.
+        if (window.location.pathname === this.pathname || this.pathname === '/') {
+             e.preventDefault();
+            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+            }
+            const targetElement = document.querySelector(this.getAttribute('href'));
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
         }
     });
 });
@@ -34,21 +36,19 @@ if (canvas) {
 
     const hexSize = 20;
     const hexHeight = hexSize * Math.sqrt(3);
-    const hexWidth = hexSize * 2;
     const vertDist = hexHeight;
-    const horizDist = hexWidth * 3 / 4;
+    const horizDist = hexSize * 2 * 3 / 4;
 
-    let wave = {
-        radius: 0,
-        speed: 1.5,
-        maxRadius: Math.max(canvas.width, canvas.height) * 1.2
+    let wave = { 
+        radius: 0, 
+        speed: 1.5, 
+        maxRadius: Math.max(canvas.width, canvas.height) * 1.2 
     };
 
     function drawHex(x, y, opacity) {
         ctx.beginPath();
         for (let i = 0; i < 6; i++) {
-            const angle_deg = 60 * i - 30;
-            const angle_rad = Math.PI / 180 * angle_deg;
+            const angle_rad = Math.PI / 180 * (60 * i - 30);
             ctx.lineTo(x + hexSize * Math.cos(angle_rad), y + hexSize * Math.sin(angle_rad));
         }
         ctx.closePath();
@@ -65,17 +65,17 @@ if (canvas) {
         if (wave.radius > wave.maxRadius) {
             wave.radius = 0;
         }
+
         const originX = canvas.width;
         const originY = 0;
+
         for (let row = 0; row < canvas.height / vertDist + 1; row++) {
             for (let col = 0; col < canvas.width / horizDist + 1; col++) {
                 const x = col * horizDist;
                 const y = row * vertDist + ((col % 2) * (vertDist / 2));
-                const dx = x - originX;
-                const dy = y - originY;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                const waveWidth = 250;
-                const opacity = Math.max(0, (waveWidth - Math.abs(distance - wave.radius)) / waveWidth);
+                const distance = Math.sqrt(Math.pow(x - originX, 2) + Math.pow(y - originY, 2));
+                const opacity = Math.max(0, (250 - Math.abs(distance - wave.radius)) / 250);
+                
                 if (opacity > 0) {
                     drawHex(x, y, opacity);
                 }
@@ -83,7 +83,7 @@ if (canvas) {
         }
         requestAnimationFrame(animate);
     }
-    
+
     window.addEventListener('resize', () => {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
@@ -107,14 +107,15 @@ if (hudContainer) {
         `}`,
     ];
     let lineCounter = 0;
+
     function createHudElement() {
         const el = document.createElement('div');
-        const codeLine = codeSnippets[lineCounter % codeSnippets.length];
-        el.innerHTML = codeLine;
+        el.innerHTML = codeSnippets[lineCounter % codeSnippets.length];
         lineCounter++;
         el.className = 'opacity-0 transition-opacity duration-500';
         hudContainer.appendChild(el);
         setTimeout(() => el.classList.remove('opacity-0'), 100);
+
         if (hudContainer.children.length > 8) {
             hudContainer.children[0].classList.add('opacity-0');
             setTimeout(() => hudContainer.children[0].remove(), 500);
@@ -128,11 +129,11 @@ const featureList = document.getElementById('feature-list');
 if (featureList) {
     const featureDisplay = document.getElementById('feature-display');
     let features = [];
-
     const pageTitle = document.title;
+
     if (pageTitle.includes('Launchpad')) {
         features = [
-            { id: 'custom-design', icon: '�', title: 'Custom Design', description: "A unique, single-page design tailored to your brand. We don't use generic templates." },
+            { id: 'custom-design', icon: '🎨', title: 'Custom Design', description: "A unique, single-page design tailored to your brand. We don't use generic templates." },
             { id: 'responsive', icon: '📱', title: 'Fully Responsive', description: 'Your site will look and work perfectly on desktops, tablets, and mobile phones.' },
             { id: 'contact-form', icon: '📝', title: 'Contact Form', description: 'A secure, easy-to-use contact form so your customers can reach you anytime.' },
             { id: 'seo', icon: '🚀', title: 'SEO Foundation', description: 'We build your site with SEO best practices to help you get found on Google.' },
@@ -152,7 +153,12 @@ if (featureList) {
         featureList.innerHTML = '';
         features.forEach(feature => {
             const item = document.createElement('li');
-            item.innerHTML = `<button data-id="${feature.id}" class="feature-item w-full text-left flex items-center gap-4 p-3 rounded-lg font-bold text-gray-300"><span class="feature-icon flex-shrink-0 w-10 h-10 flex items-center justify-center bg-gray-700 rounded-lg text-xl transition-colors">${feature.icon}</span><span>${feature.title}</span></button>`;
+            item.innerHTML = `
+                <button data-id="${feature.id}" class="feature-item w-full text-left flex items-center gap-4 p-3 rounded-lg font-bold text-gray-300">
+                    <span class="feature-icon flex-shrink-0 w-10 h-10 flex items-center justify-center bg-gray-700 rounded-lg text-xl transition-colors">${feature.icon}</span>
+                    <span>${feature.title}</span>
+                </button>
+            `;
             featureList.appendChild(item);
         });
     }
@@ -162,7 +168,11 @@ if (featureList) {
         if (!feature || !featureDisplay) return;
         featureDisplay.style.opacity = 0;
         setTimeout(() => {
-            featureDisplay.innerHTML = `<div class="text-6xl mb-6">${feature.icon}</div><h3 class="font-display text-2xl font-bold text-white mb-2">${feature.title}</h3><p class="text-gray-400">${feature.description}</p>`;
+            featureDisplay.innerHTML = `
+                <div class="text-6xl mb-6">${feature.icon}</div>
+                <h3 class="font-display text-2xl font-bold text-white mb-2">${feature.title}</h3>
+                <p class="text-gray-400">${feature.description}</p>
+            `;
             featureDisplay.style.opacity = 1;
         }, 300);
         document.querySelectorAll('.feature-item').forEach(item => {
@@ -188,9 +198,66 @@ if (menuItemsContainer) {
     const cartTotalEl = document.getElementById('cart-total');
     const menuData=[{id:1,name:"Carne Asada Taco",description:"Grilled steak, onions, cilantro.",price:5.5},{id:2,name:"Al Pastor Burrito",description:"Marinated pork, pineapple, rice, beans.",price:12},{id:3,name:"Chips & Guacamole",description:"Freshly made, serves two.",price:7},{id:4,name:"Horchata",description:"Sweet rice milk drink.",price:3.5}];
     let cart=[];
-    function renderMenu(){menuItemsContainer.innerHTML="",menuData.forEach(t=>{const e=document.createElement("div");e.className="bg-gray-700/50 p-4 rounded-lg flex justify-between items-center",e.innerHTML=`<div><h4 class="font-bold text-white">${t.name}</h4><p class="text-sm text-gray-400">${t.description}</p><p class="text-sm font-bold text-yellow-400 mt-1">$${t.price.toFixed(2)}</p></div><button data-id="${t.id}" class="menu-item-add-btn h-10 w-10 rounded-full font-bold text-lg">+</button>`,menuItemsContainer.appendChild(e)})}
-    function renderCart(){if(0===cart.length)return cartItemsContainer.innerHTML='<p class="text-sm text-gray-400">Your cart is empty.</p>',void(cartTotalEl.textContent="$0.00");cartItemsContainer.innerHTML="";let t=0;cart.forEach(e=>{const o=document.createElement("div");o.className="flex justify-between items-center text-sm",o.innerHTML=`<div><p class="text-white font-bold">${e.name}</p><p class="text-gray-400">Qty: ${e.quantity}</p></div><p class="text-gray-300">$${(e.price*e.quantity).toFixed(2)}</p>`,cartItemsContainer.appendChild(o),t+=e.price*e.quantity}),cartTotalEl.textContent=`$${t.toFixed(2)}`}
-    menuItemsContainer.addEventListener("click",t=>{if(t.target.classList.contains("menu-item-add-btn")){const e=parseInt(t.target.dataset.id),o=menuData.find(t=>t.id===e),n=cart.find(t=>t.id===e);n?n.quantity++:cart.push({...o,quantity:1}),renderCart()}});
+    
+    const updateCart = (itemId, change) => {
+        let existingCartItem = cart.find(item => item.id === itemId);
+        if (existingCartItem) {
+            existingCartItem.quantity += change;
+            if (existingCartItem.quantity <= 0) {
+                cart = cart.filter(item => item.id !== itemId);
+            }
+        } else if (change > 0) {
+            const menuItem = menuData.find(item => item.id === itemId);
+            cart.push({ ...menuItem, quantity: 1 });
+        }
+        renderCart();
+    };
+
+    function renderMenu(){menuItemsContainer.innerHTML="",menuData.forEach(t=>{const e=document.createElement("div");e.className="bg-gray-700/50 p-4 rounded-lg flex justify-between items-center",e.innerHTML=`<div><h4 class="font-bold text-white">${t.name}</h4><p class="text-sm text-gray-400">${t.description}</p><p class="text-sm font-bold text-yellow-400 mt-1">$${t.price.toFixed(2)}</p></div><button data-id="${t.id}" class="add-btn menu-item-add-btn h-10 w-10 rounded-full font-bold text-lg">+</button>`,menuItemsContainer.appendChild(e)})}
+    
+    function renderCart(){
+        if(cart.length === 0){
+            cartItemsContainer.innerHTML='<p class="text-sm text-gray-400">Your cart is empty.</p>';
+            cartTotalEl.textContent="$0.00";
+            return;
+        }
+        cartItemsContainer.innerHTML="";
+        let total=0;
+        cart.forEach(item => {
+            const itemEl = document.createElement('div');
+            itemEl.className="flex justify-between items-center text-sm";
+            itemEl.innerHTML = `
+                <div>
+                    <p class="text-white font-bold">${item.name}</p>
+                    <p class="text-gray-400">$${item.price.toFixed(2)} each</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button data-id="${item.id}" class="subtract-btn h-6 w-6 rounded-md bg-gray-600 text-white font-bold">-</button>
+                    <span class="text-white w-4 text-center">${item.quantity}</span>
+                    <button data-id="${item.id}" class="add-btn h-6 w-6 rounded-md bg-gray-600 text-white font-bold">+</button>
+                </div>
+            `;
+            cartItemsContainer.appendChild(itemEl);
+            total += item.price * item.quantity;
+        });
+        cartTotalEl.textContent=`$${total.toFixed(2)}`;
+    }
+
+    menuItemsContainer.addEventListener("click", e => {
+        if(e.target.classList.contains('add-btn')){
+            updateCart(parseInt(e.target.dataset.id), 1);
+        }
+    });
+
+    cartItemsContainer.addEventListener("click", e => {
+        if(e.target.classList.contains('add-btn')){
+            updateCart(parseInt(e.target.dataset.id), 1);
+        }
+        if(e.target.classList.contains('subtract-btn')){
+            updateCart(parseInt(e.target.dataset.id), -1);
+        }
+    });
+
     renderMenu();
 }
 
@@ -201,9 +268,66 @@ if (productGrid) {
     const cartTotalEl = document.getElementById('cart-total');
     const productData=[{id:1,name:"NerdVision Tee",emoji:"👕",price:25},{id:2,name:"NerdVision Mug",emoji:"☕",price:15},{id:3,name:"NerdVision Sticker Pack",emoji:"✨",price:10},{id:4,name:"Supernova Hoodie",emoji:"🧥",price:55}];
     let cart=[];
-    function renderProducts(){productGrid.innerHTML="",productData.forEach(t=>{const e=document.createElement("div");e.className="bg-gray-700/50 p-4 rounded-lg text-center",e.innerHTML=`<div class="text-5xl mb-4">${t.emoji}</div><h4 class="font-bold text-white">${t.name}</h4><p class="text-sm font-bold text-yellow-400 mt-1">$${t.price.toFixed(2)}</p><button data-id="${t.id}" class="w-full mt-4 menu-item-add-btn py-2 px-4 rounded-full font-bold text-sm">Add to Cart</button>`,productGrid.appendChild(e)})}
-    function renderCart(){if(0===cart.length)return cartItemsContainer.innerHTML='<p class="text-sm text-gray-400">Your cart is empty.</p>',void(cartTotalEl.textContent="$0.00");cartItemsContainer.innerHTML="";let t=0;cart.forEach(e=>{const o=document.createElement("div");o.className="flex justify-between items-center text-sm",o.innerHTML=`<div><p class="text-white font-bold">${e.name}</p><p class="text-gray-400">Qty: ${e.quantity}</p></div><p class="text-gray-300">$${(e.price*e.quantity).toFixed(2)}</p>`,cartItemsContainer.appendChild(o),t+=e.price*e.quantity}),cartTotalEl.textContent=`$${t.toFixed(2)}`}
-    productGrid.addEventListener("click",t=>{if(t.target.classList.contains("menu-item-add-btn")){const e=parseInt(t.target.dataset.id),o=productData.find(t=>t.id===e),n=cart.find(t=>t.id===e);n?n.quantity++:cart.push({...o,quantity:1}),renderCart()}});
+
+    const updateProductCart = (productId, change) => {
+        let existingCartItem = cart.find(item => item.id === productId);
+        if (existingCartItem) {
+            existingCartItem.quantity += change;
+            if (existingCartItem.quantity <= 0) {
+                cart = cart.filter(item => item.id !== productId);
+            }
+        } else if (change > 0) {
+            const product = productData.find(item => item.id === productId);
+            cart.push({ ...product, quantity: 1 });
+        }
+        renderProductCart();
+    };
+
+    function renderProducts(){productGrid.innerHTML="",productData.forEach(t=>{const e=document.createElement("div");e.className="bg-gray-700/50 p-4 rounded-lg text-center",e.innerHTML=`<div class="text-5xl mb-4">${t.emoji}</div><h4 class="font-bold text-white">${t.name}</h4><p class="text-sm font-bold text-yellow-400 mt-1">$${t.price.toFixed(2)}</p><button data-id="${t.id}" class="add-btn w-full mt-4 menu-item-add-btn py-2 px-4 rounded-full font-bold text-sm">Add to Cart</button>`,productGrid.appendChild(e)})}
+    
+    function renderProductCart(){
+        if(cart.length === 0){
+            cartItemsContainer.innerHTML='<p class="text-sm text-gray-400">Your cart is empty.</p>';
+            cartTotalEl.textContent="$0.00";
+            return;
+        }
+        cartItemsContainer.innerHTML="";
+        let total=0;
+        cart.forEach(item => {
+            const itemEl = document.createElement('div');
+            itemEl.className="flex justify-between items-center text-sm";
+            itemEl.innerHTML = `
+                <div>
+                    <p class="text-white font-bold">${item.name}</p>
+                    <p class="text-gray-400">$${item.price.toFixed(2)} each</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button data-id="${item.id}" class="subtract-btn h-6 w-6 rounded-md bg-gray-600 text-white font-bold">-</button>
+                    <span class="text-white w-4 text-center">${item.quantity}</span>
+                    <button data-id="${item.id}" class="add-btn h-6 w-6 rounded-md bg-gray-600 text-white font-bold">+</button>
+                </div>
+            `;
+            cartItemsContainer.appendChild(itemEl);
+            total += item.price * item.quantity;
+        });
+        cartTotalEl.textContent=`$${total.toFixed(2)}`;
+    }
+
+    productGrid.addEventListener("click", e => {
+        if(e.target.classList.contains('add-btn')){
+            updateProductCart(parseInt(e.target.dataset.id), 1);
+        }
+    });
+
+    cartItemsContainer.addEventListener("click", e => {
+        if(e.target.classList.contains('add-btn')){
+            updateProductCart(parseInt(e.target.dataset.id), 1);
+        }
+        if(e.target.classList.contains('subtract-btn')){
+            updateProductCart(parseInt(e.target.dataset.id), -1);
+        }
+    });
+
     renderProducts();
 
     const salesChartCanvas = document.getElementById('salesChart');
@@ -218,34 +342,34 @@ if (productGrid) {
     }
 }
 
+
 // --- Pre-select service from URL parameter ---
-// This function runs when any page loads to check the URL.
 window.addEventListener('DOMContentLoaded', () => {
-    // Check if the URL has a hash (#) and a query parameter (?).
-    if (window.location.hash && window.location.hash.includes('?')) {
-        const hashParts = window.location.hash.split('?');
-        const hash = hashParts[0]; // This will be '#contact'
-        const paramsString = hashParts[1]; // This will be 'service=Launchpad'
-        
-        const params = new URLSearchParams(paramsString);
-        const service = params.get('service');
-
-        // If we found a service parameter, set the dropdown value.
-        if (service) {
-            const serviceSelect = document.getElementById('service');
-            if (serviceSelect) {
-                serviceSelect.value = service;
-            }
+    const params = new URLSearchParams(window.location.search);
+    const service = params.get('service');
+    
+    if (service) {
+        const serviceSelect = document.getElementById('service');
+        if (serviceSelect) {
+            serviceSelect.value = service;
         }
+    }
 
-        // Now, scroll to the correct section.
+    const hash = window.location.hash;
+    if (hash) {
         const targetElement = document.querySelector(hash);
         if (targetElement) {
-            // A small timeout ensures the browser has finished loading before we scroll.
             setTimeout(() => {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth'
-                });
+                targetElement.scrollIntoView();
+                
+                // --- CORRECTED LOGIC ---
+                // Only focus on the name input if the hash is #contact
+                if (hash === '#contact') {
+                    const nameInput = document.getElementById('name');
+                    if (nameInput) {
+                        nameInput.focus();
+                    }
+                }
             }, 100);
         }
     }
