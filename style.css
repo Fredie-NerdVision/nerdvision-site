@@ -91,7 +91,10 @@ button { font: inherit; cursor: pointer; }
 @media (prefers-reduced-motion: reduce) {
   .reveal, .split .w { opacity: 1 !important; transform: none !important; transition: none !important; }
   .hl::before { transform: skew(-6deg) scaleX(1) !important; }
-  .float, .marquee-track, .mock--old, .mock--new, .hero-blob, .scroll-cue span { animation: none !important; }
+  .float, .marquee-track, .hero-blob, .scroll-cue span, .mo-banner, .demo-arrow .icon,
+  [data-morph] .mock--old, [data-morph] .mock--new, [data-morph] .url-old, [data-morph] .url-new,
+  [data-morph] .morph-badge--old, [data-morph] .morph-badge--new { animation: none !important; }
+  [data-morph] .mock--old, [data-morph] .url-old, [data-morph] .morph-badge--old { display: none; }
 }
 
 /* ---------- buttons ---------- */
