@@ -1,222 +1,513 @@
-<!DOCTYPE html>
-<!-- I'm setting the language to English and enabling smooth scrolling for the whole page. -->
-<html lang="en" class="scroll-smooth">
+<!doctype html>
+<html lang="en">
 <head>
-    <!-- Basic meta tags for character set and responsive design. -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NerdVision | Approachable Tech Solutions</title>
-
-    <!-- External Libraries: Tailwind for styling and Google Fonts for our custom typography. -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@700;900&family=Roboto+Mono:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    
-    <!-- This is the link to my custom stylesheet where I'll keep all my unique brand styles. -->
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NerdVision — Websites you actually own</title>
+  <meta name="description" content="NerdVision rebuilds tired websites into fast, modern sites you can edit yourself — with plain-English fields, your own logins, and zero lock-in.">
+  <meta name="theme-color" content="#FFD740">
+  <meta property="og:title" content="NerdVision — Websites you actually own">
+  <meta property="og:description" content="We rebuild old sites and hand you the keys. Plain-English editing, your own accounts, no monthly ransom.">
+  <meta property="og:image" content="assets/img/logo.png">
+  <link rel="icon" href="assets/img/icon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
-<body class="antialiased">
-    <!-- This canvas is for the background animation. I've placed it first so it sits behind everything else. -->
-    <!-- The 'pointer-events-none' class is crucial to ensure this canvas doesn't block clicks on the content below. -->
-    <canvas id="hero-canvas" class="fixed top-0 left-0 w-full h-full z-0 pointer-events-none"></canvas>
-    
-    <!-- This div wraps all the visible content and uses a relative z-index to ensure it sits on top of the canvas. -->
-    <div class="relative z-10">
-        <!-- HEADER SECTION: This will be my sticky navigation bar. -->
-        <header class="bg-white/80 backdrop-blur-sm fixed top-0 left-0 right-0 z-50 border-b border-gray-200/80">
-            <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
-                <a href="#home" class="flex items-center gap-3">
-                    <img src="fulllogo_transparent_nobuffer.png" alt="NerdVision Logo" class="h-10">
-                </a>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#services" class="nav-link text-base font-medium text-gray-600">Services</a>
-                    <a href="#portfolio" class="nav-link text-base font-medium text-gray-600">Portfolio</a>
-                    <a href="#about" class="nav-link text-base font-medium text-gray-600">About</a>
-                </div>
-                <a href="#contact" class="hidden md:inline-block btn-primary py-2 px-6 text-sm">Get In Touch</a>
-                <div class="md:hidden">
-                    <button id="mobile-menu-button" class="text-gray-800 focus:outline-none">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-                    </button>
-                </div>
-            </nav>
-            <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur-sm">
-                <a href="#services" class="block text-center py-3 px-4 text-sm hover:bg-gray-100">Services</a>
-                <a href="#portfolio" class="block text-center py-3 px-4 text-sm hover:bg-gray-100">Portfolio</a>
-                <a href="#about" class="block text-center py-3 px-4 text-sm hover:bg-gray-100">About</a>
-                <a href="#contact" class="block text-center py-3 px-4 text-sm hover:bg-gray-100">Contact</a>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="cursor-glow" aria-hidden="true"></div>
+<div class="progress" aria-hidden="true"><span></span></div>
+
+<div id="top"></div>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="#top" class="brand" aria-label="NerdVision home"><img src="assets/img/logo.png" alt="NerdVision" width="320" height="110"></a>
+    <nav class="site-nav" aria-label="Primary">
+      <ul class="nav-list">
+        <li><a href="#refresh">Refresh</a></li>
+        <li><a href="#ownership">Ownership</a></li>
+        <li><a href="#builders">Why us</a></li>
+        <li><a href="#packages">Packages</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn--primary header-cta" href="#contact"><span>Let's talk</span><svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-nav" id="mobile-nav">
+    <ul class="nav-list">
+      <li><a href="#refresh">Refresh</a></li>
+      <li><a href="#ownership">Ownership</a></li>
+      <li><a href="#builders">Why us</a></li>
+      <li><a href="#packages">Packages</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a class="btn btn--primary" href="#contact"><span>Let's talk</span></a>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero" id="hero">
+    <canvas class="hero-canvas" aria-hidden="true"></canvas>
+    <div class="hero-blob hero-blob--yellow" aria-hidden="true"></div>
+    <div class="hero-blob hero-blob--cyan" aria-hidden="true"></div>
+
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow eyebrow--pill reveal"><svg class="icon" viewBox="0 0 24 24"><circle cx="8" cy="14" r="4"/><path d="M11 11l9-9M16 4l3 3M13 7l3 3"/></svg> Web development for people who want the keys</p>
+        <h1 class="h1 split">Websites you <span class="hl">actually own.</span> Built to be edited by <span class="hl hl--cyan">you.</span></h1>
+        <p class="lead reveal" style="--d:.35s">We rebuild tired sites into fast, modern ones with plain-English editing fields — then hand you every login, file and password. No lock-in. No monthly ransom.</p>
+        <div class="hero-actions reveal" style="--d:.5s">
+          <a class="btn btn--primary btn--lg magnetic" href="#contact"><span>Get a free site review</span><svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn--ghost btn--lg" href="#packages"><span>See the packages</span></a>
+        </div>
+        <dl class="hero-stats reveal" style="--d:.65s">
+          <div><dt>100%</dt><dd>of clients hold their own logins</dd></div>
+          <div><dt>&lt; 1s</dt><dd>typical page load after a rebuild</dd></div>
+          <div><dt>$0</dt><dd>required monthly fees to us</dd></div>
+        </dl>
+      </div>
+
+      <div class="hero-visual reveal" style="--d:.3s">
+        <div class="browser browser--hero tilt" data-morph>
+          <div class="browser-bar">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span class="url"><span class="url-old">www.yourbusiness.com/index.htm</span><span class="url-new">yourbusiness.com</span></span>
+          </div>
+          <div class="browser-body">
+            <div class="mock mock--old">
+              <div class="mo-banner">WELCOME TO OUR WEBSITE!!!</div>
+              <div class="mo-nav"><span>Home</span><span>About Us</span><span>Links</span><span>Guestbook</span></div>
+              <div class="mo-cols">
+                <div class="mo-side"><i></i><i></i><i></i><i></i></div>
+                <div class="mo-main"><b></b><i></i><i></i><i></i><em>🚧 Under construction 🚧</em><i></i><i></i></div>
+              </div>
+              <div class="mo-footer">Best viewed in Internet Explorer 6 · Last updated 2011</div>
             </div>
-        </header>
-
-        <!-- MAIN CONTENT: This holds all the sections of my single-page site. -->
-        <main>
-            <!-- HERO SECTION: The first thing users see. -->
-            <section id="home" class="min-h-screen flex items-center pt-28 pb-10 relative overflow-hidden">
-                <div class="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-12 z-20">
-                    <div class="md:w-1/2 text-center md:text-left">
-                        <h1 class="font-display text-4xl lg:text-6xl font-black leading-tight text-gray-800">
-                            Web Development <span class="text-yellow-500">You Own</span> and <span class="text-cyan-500">Understand.</span>
-                        </h1>
-                        <p class="mt-4 text-lg text-gray-600 max-w-xl">We build high-performance websites and give you the keys. No confusing jargon, no endless subscriptions. Just a superior digital asset, fully yours.</p>
-                        <a href="#services" class="mt-8 inline-block btn-primary py-4 px-8 text-lg">View Packages</a>
-                    </div>
-                    <div class="md:w-1/2 flex justify-center items-center">
-                        <div class="relative w-full max-w-md h-80">
-                            <div class="absolute inset-0 bg-yellow-400/20 rounded-full blur-3xl"></div>
-                            <div class="relative w-full h-full card-light p-4 flex items-center justify-center bg-white/50 backdrop-blur-sm">
-                                <div id="hud-container" class="w-full h-full flex flex-col gap-2 font-mono text-xs p-2"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SERVICES SECTION: Outlines the different packages I offer. -->
-            <section id="services" class="py-20 bg-white">
-                <div class="container mx-auto px-6 text-center">
-                    <h2 class="font-display text-3xl font-black text-gray-800 mb-2">Service Packages</h2>
-                    <p class="text-gray-600 mb-12 max-w-2xl mx-auto">Choose your deployment package. No hidden variables, just mission parameters.</p>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <a href="launchpad.html" class="card-light p-8 text-left flex flex-col"><div class="h-16 w-16 mb-6 flex items-center justify-center bg-gray-100 rounded-xl"><span class="text-3xl">📄</span></div><h3 class="font-display text-2xl font-bold text-gray-800 mb-2">Launchpad</h3><div class="mb-4"><p class="text-sm font-medium text-gray-500">Starting at</p><p class="text-3xl font-bold text-gray-800">$1,500</p></div><p class="text-gray-500 mb-6 flex-grow">A single-page deployment to establish a digital footprint.</p><span class="mt-auto font-bold text-yellow-600">Learn More &rarr;</span></a>
-                        <a href="accelerator.html" class="card-light p-8 text-left border-2 border-yellow-400 flex flex-col"><div class="h-16 w-16 mb-6 flex items-center justify-center bg-yellow-100 rounded-xl"><span class="text-3xl">📅</span></div><h3 class="font-display text-2xl font-bold text-gray-800 mb-2">Accelerator</h3><div class="mb-4"><p class="text-sm font-medium text-gray-500">Starting at</p><p class="text-3xl font-bold text-gray-800">$2,500</p></div><p class="text-gray-500 mb-6 flex-grow">Integrated systems for transactions and scheduling.</p><span class="mt-auto font-bold text-yellow-600">Learn More &rarr;</span></a>
-                        <a href="supernova.html" class="card-light p-8 text-left flex flex-col"><div class="h-16 w-16 mb-6 flex items-center justify-center bg-cyan-100 rounded-xl"><span class="text-3xl">🚀</span></div><h3 class="font-display text-2xl font-bold text-gray-800 mb-2">Supernova</h3><div class="mb-4"><p class="text-sm font-medium text-gray-500">Starting at</p><p class="text-3xl font-bold text-gray-800">$4,000</p></div><p class="text-gray-500 mb-6 flex-grow">Full-stack solution with e-commerce and a client data vault.</p><span class="mt-auto font-bold text-yellow-600">Learn More &rarr;</span></a>
-                    </div>
-                </div>
-            </section>
-
-            <!-- RESPONSIVE SECTION: Highlights a key feature of my services. -->
-            <section id="responsive" class="py-24" style="background-color: var(--bg-dark); color: var(--text-light);">
-                <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-12 md:gap-20">
-                    <div class="md:w-1/2 flex justify-center items-center min-h-[400px]">
-                        <div class="device-container device-frame">
-                            <div class="device-screen">
-                                <div class="flex items-center gap-2 p-1 bg-white rounded-md shadow-sm">
-                                    <div class="w-4 h-4 rounded-full bg-cyan-400"></div>
-                                    <div class="w-1/2 h-2 rounded-full bg-gray-300"></div>
-                                </div>
-                                <div class="w-full h-1/4 bg-yellow-400/80 rounded-md mt-2"></div>
-                                <div class="h-2 w-5/6 mt-2 bg-gray-300 rounded-full"></div>
-                                <div class="h-2 w-full bg-gray-300 rounded-full"></div>
-                                <div class="h-2 w-2/3 bg-gray-300 rounded-full"></div>
-                                <div class="flex-grow"></div>
-                                <div class="h-4 w-full bg-gray-800 rounded-md"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="md:w-1/2">
-                        <h2 class="font-display text-3xl font-black text-white mb-4">Looks Great on Every Device.</h2>
-                        <p class="text-gray-300 mb-4 text-lg">From phones and tablets to desktops, we build every website to be fully responsive. Your customers get a perfect experience, no matter how they find you.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- E-COMMERCE SECTION: Highlights another key feature. -->
-            <section id="ecommerce" class="py-24 bg-white">
-                <div class="container mx-auto px-6 flex flex-col md:flex-row-reverse items-center gap-12 md:gap-20">
-                    <div class="md:w-1/2 flex justify-center items-center">
-                        <div class="product-card w-64 bg-white p-4 rounded-2xl shadow-2xl border">
-                            <div class="w-full h-40 bg-yellow-100 rounded-lg flex items-center justify-center text-5xl">🌮</div>
-                            <h4 class="font-bold text-lg mt-4">Tasty Taco</h4>
-                            <p class="text-sm text-gray-500">$5.00</p>
-                            <button class="w-full mt-4 btn-primary py-2 px-4 text-sm flex items-center justify-center gap-2">
-                                <span class="cart-icon">🛒</span> Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                    <div class="md:w-1/2">
-                        <h2 class="font-display text-3xl font-black text-gray-800 mb-4">Sell Online with Ease.</h2>
-                        <p class="text-gray-600 mb-4 text-lg">Our Accelerator and Supernova packages include everything you need to sell products or take online orders. We integrate secure payment systems and build intuitive interfaces that make buying simple for your customers.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- PORTFOLIO SECTION: Shows off my past work. -->
-            <section id="portfolio" class="py-20 grid-bg">
-                <div class="container mx-auto px-6">
-                    <h2 class="font-display text-3xl font-black text-gray-800 text-center mb-2">Featured Projects</h2>
-                    <p class="text-gray-600 text-center mb-12 max-w-2xl mx-auto">Field-tested deployments for a diverse client roster.</p>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <div class="group card-light"><div class="rounded-2xl overflow-hidden"><img src="https://placehold.co/400x300/FEE2E2/991B1B?text=La+Vida+Tacos" alt="Website design for La Vida Tacos restaurant" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"></div><div class="p-4"><h3 class="font-display text-lg font-bold text-gray-800">La Vida Tacos</h3><p class="font-mono text-xs text-cyan-600">[WordPress + WooCommerce]</p></div></div>
-                        <div class="group card-light"><div class="rounded-2xl overflow-hidden"><img src="https://placehold.co/400x300/FEF3C7/92400E?text=Tiny+Beans+Café" alt="Mobile website design for Tiny Beans Cafe" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"></div><div class="p-4"><h3 class="font-display text-lg font-bold text-gray-800">Tiny Beans Café</h3><p class="font-mono text-xs text-cyan-600">[HTML, CSS, JS]</p></div></div>
-                        <div class="group card-light"><div class="rounded-2xl overflow-hidden"><img src="https://placehold.co/400x300/DBEAFE/1E40AF?text=Sushi+Zen" alt="Booking system design for Sushi Zen" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"></div><div class="p-4"><h3 class="font-display text-lg font-bold text-gray-800">Sushi Zen</h3><p class="font-mono text-xs text-cyan-600">[React + Booking API]</p></div></div>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- ABOUT SECTION: Builds trust with the user. -->
-            <section id="about" class="py-24" style="background-color: var(--bg-dark); color: var(--text-light);">
-                <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-12 md:gap-20">
-                    <div class="md:w-1/2 flex justify-center">
-                        <div class="w-64 h-64">
-                             <img src="icononly_transparent_nobuffer.png" alt="NerdVision company icon" class="w-full h-full">
-                        </div>
-                    </div>
-                    <div class="md:w-1/2">
-                        <h2 class="font-display text-3xl font-black text-white mb-4">The Team Behind the Code</h2>
-                        <p class="text-gray-300 mb-4 text-lg">Our mission is to provide transparent, high-quality web development that empowers you. We build your site, teach you how to use it, and then hand over the keys. It’s your business—you should own your website.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- CONTACT SECTION: The main call to action. -->
-            <section id="contact" class="py-24 grid-bg">
-                <div class="container mx-auto px-6">
-                    <div class="max-w-xl mx-auto text-center">
-                        <h2 class="font-display text-3xl md:text-4xl font-black text-gray-800">Let's Build Together</h2>
-                        <p class="text-gray-600 mt-4 mb-8">Have a project in mind? Transmit your details and let's create something amazing.</p>
-                    </div>
-                    <form class="max-w-xl mx-auto mt-8">
-                        <div class="space-y-6">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div>
-                                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
-                                    <input type="text" id="name" class="input-field w-full" placeholder="Jane Doe" required>
-                                </div>
-                                <div>
-                                    <label for="business-name" class="block text-sm font-medium text-gray-700 mb-1">Business Name</label>
-                                    <input type="text" id="business-name" class="input-field w-full" placeholder="The Golden Spoon Bistro" required>
-                                </div>
-                            </div>
-                            <div>
-                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                                <input type="email" id="email" class="input-field w-full" placeholder="you@example.com" required>
-                            </div>
-                            <div>
-                                <label for="service" class="block text-sm font-medium text-gray-700 mb-1">Which service are you interested in?</label>
-                                <select id="service" class="input-field w-full">
-                                    <option>Not Sure Yet</option>
-                                    <option>Launchpad</option>
-                                    <option>Accelerator</option>
-                                    <option>Supernova</option>
-                                </select>
-                            </div>
-                             <div>
-                                <label for="website" class="block text-sm font-medium text-gray-700 mb-1">Existing Website (Optional)</label>
-                                <input type="url" id="website" class="input-field w-full" placeholder="https://example.com">
-                            </div>
-                            <div>
-                                <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
-                                <textarea id="message" rows="4" class="input-field w-full" placeholder="Tell me about your project..." required></textarea>
-                            </div>
-                            <div>
-                                <button type="submit" class="w-full btn-primary py-3 text-lg">Send Message</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </section>
-        </main>
-        
-        <!-- FOOTER SECTION: Standard copyright and final links. -->
-        <footer class="bg-white border-t border-gray-200">
-            <div class="container mx-auto px-6 py-6 text-center text-gray-500 text-sm">
-                <p>&copy; 2024 NERDVISION // All Rights Reserved</p>
+            <div class="mock mock--new">
+              <div class="mn-nav"><span class="mn-logo"></span><span></span><span></span><span></span><span class="mn-btn"></span></div>
+              <div class="mn-hero">
+                <div><b></b><b class="short"></b><i></i><i></i><span class="mn-cta"></span></div>
+                <div class="mn-art"><span></span><span></span><span></span></div>
+              </div>
+              <div class="mn-cards"><span></span><span></span><span></span></div>
             </div>
-        </footer>
+            <div class="morph-badge morph-badge--old">Before</div>
+            <div class="morph-badge morph-badge--new">After</div>
+          </div>
+        </div>
+        <div class="sticker sticker--a float" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg> Loads in 0.8s</div>
+        <div class="sticker sticker--b float" aria-hidden="true" style="--fd:1.2s"><svg class="icon" viewBox="0 0 24 24"><path d="M4 20h4l10-10-4-4L4 16v4zM13 7l4 4"/></svg> You edit this</div>
+        <div class="sticker sticker--c float" aria-hidden="true" style="--fd:.6s"><svg class="icon" viewBox="0 0 24 24"><circle cx="8" cy="14" r="4"/><path d="M11 11l9-9M16 4l3 3M13 7l3 3"/></svg> Your logins</div>
+      </div>
     </div>
-    <!-- I link my JavaScript file at the very end of the body for performance. -->
-    <!-- This lets the browser render all the HTML content first, so the user sees the page faster. -->
-    <script src="scripts.js"></script>
+    <a class="scroll-cue" href="#refresh" aria-label="Scroll to next section"><span></span></a>
+  </section>
+
+  <!-- ===================== TICKER ===================== -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>You own the domain</span><span>You own the hosting</span><span>You own the code</span><span>Plain-English editing</span><span>No page-builder spaghetti</span><span>No monthly ransom</span><span>Fast on phones</span><span>We teach, then hand over</span>
+      <span>You own the domain</span><span>You own the hosting</span><span>You own the code</span><span>Plain-English editing</span><span>No page-builder spaghetti</span><span>No monthly ransom</span><span>Fast on phones</span><span>We teach, then hand over</span>
+    </div>
+  </div>
+
+  <!-- ===================== REFRESH ===================== -->
+  <section class="section refresh" id="refresh">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Have a site already?</p>
+        <h2 class="h2 split">Your old site is costing you customers. <span class="hl">Let's fix that.</span></h2>
+        <p class="lead">Most of our work is rescuing sites built five, ten, fifteen years ago: slow, not mobile-friendly, impossible to update. We keep what works, rebuild what doesn't, and you keep your domain and search rankings.</p>
+      </div>
+
+      <div class="refresh-grid">
+        <div class="compare reveal" data-compare>
+          <div class="compare-frame">
+            <div class="compare-after">
+              <div class="mock mock--new mock--static">
+                <div class="mn-nav"><span class="mn-logo"></span><span></span><span></span><span></span><span class="mn-btn"></span></div>
+                <div class="mn-hero">
+                  <div><b></b><b class="short"></b><i></i><i></i><span class="mn-cta"></span></div>
+                  <div class="mn-art"><span></span><span></span><span></span></div>
+                </div>
+                <div class="mn-cards"><span></span><span></span><span></span></div>
+              </div>
+              <span class="compare-label compare-label--after">After</span>
+            </div>
+            <div class="compare-before">
+              <div class="mock mock--old mock--static">
+                <div class="mo-banner">WELCOME TO OUR WEBSITE!!!</div>
+                <div class="mo-nav"><span>Home</span><span>About Us</span><span>Links</span><span>Guestbook</span></div>
+                <div class="mo-cols">
+                  <div class="mo-side"><i></i><i></i><i></i><i></i></div>
+                  <div class="mo-main"><b></b><i></i><i></i><i></i><em>🚧 Under construction 🚧</em><i></i><i></i></div>
+                </div>
+                <div class="mo-footer">Best viewed in Internet Explorer 6 · Last updated 2011</div>
+              </div>
+              <span class="compare-label compare-label--before">Before</span>
+            </div>
+            <div class="compare-handle" aria-hidden="true"><span>&lsaquo;&rsaquo;</span></div>
+            <input class="compare-range" type="range" min="0" max="100" value="55" aria-label="Drag to compare before and after">
+          </div>
+          <p class="compare-hint">Drag to compare</p>
+        </div>
+
+        <ul class="points">
+          <li class="point reveal"><span class="point-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><div><h3>Mobile-first</h3><p>Over 60% of your visitors are on a phone. The new site is designed for them first, then scaled up.</p></div></li>
+          <li class="point reveal" style="--d:.1s"><span class="point-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><div><h3>Actually fast</h3><p>Lean, hand-written code — not a page-builder plugin stack. Pages load in under a second.</p></div></li>
+          <li class="point reveal" style="--d:.2s"><span class="point-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><div><h3>Keep your rankings</h3><p>Every old URL redirects to its new home, so Google never loses track of you.</p></div></li>
+          <li class="point reveal" style="--d:.3s"><span class="point-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><div><h3>Edit it yourself</h3><p>Headlines, prices, photos and hours become simple labelled fields in your dashboard.</p></div></li>
+        </ul>
+      </div>
+
+      <dl class="metrics reveal">
+        <div class="metric"><dt><span class="count" data-count="3">0</span>x</dt><dd>faster page loads on average</dd></div>
+        <div class="metric"><dt><span class="count" data-count="90">0</span>+</dt><dd>Google PageSpeed scores</dd></div>
+        <div class="metric"><dt><span class="count" data-count="1">0</span>hr</dt><dd>of training is all a handoff takes</dd></div>
+        <div class="metric"><dt><span class="count" data-count="0">0</span></dt><dd>plugins you have to babysit</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ===================== OWNERSHIP + LIVE DEMO ===================== -->
+  <section class="section ownership" id="ownership">
+    <div class="wrap">
+      <div class="own-grid">
+        <div class="own-copy">
+          <div class="section-head section-head--left reveal">
+            <p class="eyebrow">True ownership</p>
+            <h2 class="h2 split">Change a headline. Swap a photo. Update a price. <span class="hl hl--cyan">Without calling us.</span></h2>
+            <p class="lead">Every site we build runs on WordPress with Advanced Custom Fields (ACF). Your content lives in labelled, plain-English boxes — not buried in a page builder or hard-coded where only a developer can reach it.</p>
+          </div>
+          <ul class="points points--tight">
+            <li class="point reveal"><span class="point-icon point-icon--cyan"><svg class="icon" viewBox="0 0 24 24"><circle cx="8" cy="14" r="4"/><path d="M11 11l9-9M16 4l3 3M13 7l3 3"/></svg></span><div><h3>Your accounts, your name</h3><p>Domain, hosting and WordPress admin are all registered to you. We're a user on your site — not the other way round.</p></div></li>
+            <li class="point reveal" style="--d:.1s"><span class="point-icon point-icon--cyan"><svg class="icon" viewBox="0 0 24 24"><circle cx="8" cy="14" r="4"/><path d="M11 11l9-9M16 4l3 3M13 7l3 3"/></svg></span><div><h3>Fields, not fiddling</h3><p>Each section of your site gets its own set of labelled fields. Type, save, done. The layout can't break.</p></div></li>
+            <li class="point reveal" style="--d:.2s"><span class="point-icon point-icon--cyan"><svg class="icon" viewBox="0 0 24 24"><circle cx="8" cy="14" r="4"/><path d="M11 11l9-9M16 4l3 3M13 7l3 3"/></svg></span><div><h3>Everything documented</h3><p>A short video walkthrough and a one-page cheat sheet for every group of fields.</p></div></li>
+            <li class="point reveal" style="--d:.3s"><span class="point-icon point-icon--cyan"><svg class="icon" viewBox="0 0 24 24"><circle cx="8" cy="14" r="4"/><path d="M11 11l9-9M16 4l3 3M13 7l3 3"/></svg></span><div><h3>Leave whenever</h3><p>Any WordPress developer can pick up where we left off. Nothing proprietary, nothing hidden.</p></div></li>
+          </ul>
+        </div>
+
+        <div class="own-demo reveal" data-acf-demo>
+          <div class="demo-admin">
+            <div class="demo-admin-bar"><span class="demo-wp">W</span> Edit Page: Home <span class="demo-save">Saved</span></div>
+            <div class="demo-group">
+              <p class="demo-group-title">Hero Section</p>
+              <label class="demo-field"><span>Headline</span><input type="text" data-demo="headline" value="Fresh bread, every morning" maxlength="40"></label>
+              <label class="demo-field"><span>Button label</span><input type="text" data-demo="button" value="Order ahead" maxlength="18"></label>
+              <label class="demo-field"><span>Special price</span><input type="text" data-demo="price" value="$6" maxlength="8"></label>
+              <div class="demo-field"><span>Accent colour</span>
+                <div class="demo-swatches">
+                  <button type="button" data-demo-color="#FFD740" style="--c:#FFD740" class="is-active" aria-label="Yellow"></button>
+                  <button type="button" data-demo-color="#4DD0E1" style="--c:#4DD0E1" aria-label="Cyan"></button>
+                  <button type="button" data-demo-color="#FF8A65" style="--c:#FF8A65" aria-label="Coral"></button>
+                  <button type="button" data-demo-color="#AED581" style="--c:#AED581" aria-label="Green"></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-arrow" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <div class="browser browser--demo">
+            <div class="browser-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">goldenspoonbakery.com</span></div>
+            <div class="demo-site" style="--accent:#FFD740">
+              <div class="ds-nav"><span class="ds-logo">GS</span><span></span><span></span><span></span></div>
+              <div class="ds-hero">
+                <div>
+                  <h4 data-demo-out="headline">Fresh bread, every morning</h4>
+                  <p>Baked in-house since 1998. Sourdough, rye, and the cinnamon rolls people drive across town for.</p>
+                  <span class="ds-btn" data-demo-out="button">Order ahead</span>
+                </div>
+                <div class="ds-card"><span class="ds-tag">Today only</span><b>🥐</b><p>Almond croissant</p><strong data-demo-out="price">$6</strong></div>
+              </div>
+            </div>
+          </div>
+          <p class="demo-caption">Try it: edit the fields above. This is what your dashboard feels like.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== BUILDERS ===================== -->
+  <section class="section builders" id="builders">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Wix, Squarespace &amp; the "AI website" crowd</p>
+        <h2 class="h2 split">The builder site is the <span class="hl hl--coral">new old site.</span></h2>
+        <p class="lead">Drag-and-drop and "generate my site" tools are quick to start and slow forever after. They rent you a template, pile on scripts you can't remove, and keep the exit door locked. Here's the honest comparison.</p>
+      </div>
+
+      <div class="versus reveal">
+        <div class="versus-col versus-col--them">
+          <div class="versus-head">
+            <span class="versus-tag">Builder / AI-generated</span>
+            <div class="bloat-meter" aria-label="Typical page weight: heavy">
+              <span class="bloat-bar" style="--w:92%"></span>
+              <em><b class="count" data-count="4">0</b>MB+ per page</em>
+            </div>
+          </div>
+          <ul class="versus-list">
+            <li><svg class="icon" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg><div><strong>Bloated by design.</strong> Dozens of scripts, trackers and unused widgets load on every page, so it crawls on phones and Google notices.</div></li>
+            <li><svg class="icon" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg><div><strong>Looks like everyone else.</strong> AI builders remix the same twelve templates. Your customers have seen your hero section before, with a different logo.</div></li>
+            <li><svg class="icon" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg><div><strong>Rent, forever.</strong> Stop paying and the site vanishes. Upgrade tiers just to remove their badge or connect your own domain.</div></li>
+            <li><svg class="icon" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg><div><strong>No exit.</strong> There is no "export my site" that works. Leaving means starting from zero and losing your search rankings.</div></li>
+            <li><svg class="icon" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg><div><strong>Fragile editing.</strong> Nudge one box and the layout breaks on mobile. Nobody to call when it does.</div></li>
+          </ul>
+        </div>
+
+        <div class="versus-vs" aria-hidden="true"><span>vs</span></div>
+
+        <div class="versus-col versus-col--us">
+          <div class="versus-head">
+            <span class="versus-tag">A NerdVision build</span>
+            <div class="bloat-meter" aria-label="Typical page weight: light">
+              <span class="bloat-bar bloat-bar--good" style="--w:14%"></span>
+              <em>&lt; <b class="count" data-count="1">0</b>MB per page</em>
+            </div>
+          </div>
+          <ul class="versus-list">
+            <li><svg class="icon" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><div><strong>Only what you need.</strong> Hand-written code, no plugin pile-up. Pages load in under a second on a phone.</div></li>
+            <li><svg class="icon" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><div><strong>Designed for your business.</strong> Real decisions about who lands on the page and what they should do next — not a prompt and a shrug.</div></li>
+            <li><svg class="icon" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><div><strong>Pay once, own it.</strong> Hosting and domain in your name. Nothing switches off if you stop talking to us.</div></li>
+            <li><svg class="icon" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><div><strong>Portable.</strong> Standard WordPress + your files. Any developer on earth can pick it up.</div></li>
+            <li><svg class="icon" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><div><strong>Editing that can't break.</strong> Labelled fields for your content; the layout stays exactly as designed.</div></li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="builders-note reveal">Already on a builder? Bring it. Migrating off Wix, Squarespace, GoDaddy or an AI builder — rankings intact — is one of the most common jobs we do. <a href="#contact">Ask for a free review</a>.</p>
+    </div>
+  </section>
+
+  <!-- ===================== PACKAGES ===================== -->
+  <section class="section packages" id="packages">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Packages</p>
+        <h2 class="h2 split">Clear prices. <span class="hl">No surprises.</span></h2>
+        <p class="lead">Every package includes hosting set up in your name, a training session, and a full handoff. Pick the size that fits — we'll tell you honestly if a smaller one would do.</p>
+      </div>
+
+      <div class="package-grid">
+        <article class="package tilt reveal">
+          <div class="package-head"><span class="package-icon">📄</span><h3>Launchpad</h3><p class="package-tagline">A sharp single-page site to plant your flag online.</p></div>
+          <p class="package-price"><small>Starting at</small><strong>$1,500</strong></p>
+          <p class="package-audience"><b>Best for:</b> new businesses, freelancers, and anyone replacing a site that's embarrassing them.</p>
+          <ul class="package-features">
+            <li><svg class="icon" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Custom one-page design, mobile-first</li>
+            <li><svg class="icon" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Contact form that emails you directly</li>
+            <li><svg class="icon" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Editable fields for every headline, photo and price</li>
+            <li><svg class="icon" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Google Business + basic SEO setup</li>
+            <li><svg class="icon" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>1-hour handoff training + video</li>
+          </ul>
+          <a class="btn btn--dark package-cta" href="#contact" data-package="Launchpad"><span>Start with Launchpad</span><svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </article>
+
+        <article class="package package--featured tilt reveal" style="--d:.12s">
+          <span class="package-flag">Most popular</span>
+          <div class="package-head"><span class="package-icon">📅</span><h3>Accelerator</h3><p class="package-tagline">A multi-page site that books, sells or schedules for you.</p></div>
+          <p class="package-price"><small>Starting at</small><strong>$2,500</strong></p>
+          <p class="package-audience"><b>Best for:</b> established businesses that want the website to do some of the work.</p>
+          <ul class="package-features">
+            <li><svg class="icon" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Everything in Launchpad</li>
+            <li><svg class="icon" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Up to 8 pages, each with its own editable fields</li>
+            <li><svg class="icon" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Online booking, ordering or scheduling integration</li>
+            <li><svg class="icon" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Blog / news / menu you can add to yourself</li>
+            <li><svg class="icon" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Old-site migration with redirects to protect SEO</li>
+          </ul>
+          <a class="btn btn--primary package-cta" href="#contact" data-package="Accelerator"><span>Start with Accelerator</span><svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </article>
+
+        <article class="package tilt reveal" style="--d:.24s">
+          <div class="package-head"><span class="package-icon">🚀</span><h3>Supernova</h3><p class="package-tagline">Full e-commerce plus a private client portal.</p></div>
+          <p class="package-price"><small>Starting at</small><strong>$4,000</strong></p>
+          <p class="package-audience"><b>Best for:</b> shops and services ready to run the business through the website.</p>
+          <ul class="package-features">
+            <li><svg class="icon" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Everything in Accelerator</li>
+            <li><svg class="icon" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Full product catalog, cart, checkout, shipping &amp; tax</li>
+            <li><svg class="icon" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Customer accounts and order history</li>
+            <li><svg class="icon" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Secure client vault / portal for your operations</li>
+            <li><svg class="icon" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Analytics dashboard and 30 days of launch support</li>
+          </ul>
+          <a class="btn btn--dark package-cta" href="#contact" data-package="Supernova"><span>Start with Supernova</span><svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </article>
+      </div>
+      <p class="packages-note reveal"><svg class="icon" viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg> Refreshing an existing site? Pricing usually lands between Launchpad and Accelerator — send us the URL for a quote.</p>
+    </div>
+  </section>
+
+  <!-- ===================== PROCESS ===================== -->
+  <section class="section process" id="process">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">How it works</p>
+        <h2 class="h2 split">From “our site is embarrassing” to <span class="hl hl--cyan">“we did that ourselves”</span> in about four weeks.</h2>
+      </div>
+      <ol class="steps" data-steps>
+        <div class="steps-line" aria-hidden="true"><span></span></div>
+        <li class="step reveal"><span class="step-num">01</span><h3>Free site review</h3><p>Send us your URL. You get a plain-English rundown of what's slow, broken or costing you leads — no obligation.</p></li>
+        <li class="step reveal" style="--d:.15s"><span class="step-num">02</span><h3>Plan &amp; design</h3><p>A short call about your customers and goals, then a clickable design you can react to before any code is written.</p></li>
+        <li class="step reveal" style="--d:.3s"><span class="step-num">03</span><h3>Build</h3><p>We build on WordPress + ACF and check in weekly. You watch it come together on a private staging link.</p></li>
+        <li class="step reveal" style="--d:.45s"><span class="step-num">04</span><h3>Launch &amp; handoff</h3><p>We go live on hosting in your name, record a walkthrough video, and sit with you until editing feels easy.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===================== WORK ===================== -->
+  <section class="section work" id="work">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Recent work</p>
+        <h2 class="h2 split">Real businesses, <span class="hl">real before-and-afters.</span></h2>
+        <p class="lead">A few of the sites we've rescued, rebuilt and handed over.</p>
+      </div>
+      <div class="work-grid">
+        <article class="work-card reveal">
+          <div class="work-media" style="--hue:45"><span class="work-initials">FS</span><span class="work-result"><strong>4×</strong> faster</span></div>
+          <div class="work-body">
+            <p class="work-client">Full Spectrum Educational · School assemblies</p>
+            <h3>A 2009 brochure site, rebuilt as a bookable program catalog</h3>
+            <p>Every show became its own editable card with pricing, grade levels and a “photo coming soon” toggle. The owners now add programs themselves.</p>
+            <ul class="chips"><li>WordPress</li><li>ACF</li><li>Refresh</li></ul>
+          </div>
+        </article>
+        <article class="work-card reveal" style="--d:.12s">
+          <div class="work-media" style="--hue:190"><span class="work-initials">MH</span><span class="work-result"><strong>1 hr</strong> handoff</span></div>
+          <div class="work-body">
+            <p class="work-client">Mister Hypnosis · Live entertainment</p>
+            <h3>A performer's site with audience pages the client controls</h3>
+            <p>Grad nights, corporate, college — each audience is a post with bullets and a video ID. Testimonials and client logos are fields, not code.</p>
+            <ul class="chips"><li>WordPress</li><li>ACF</li><li>Video</li></ul>
+          </div>
+        </article>
+        <article class="work-card reveal" style="--d:.24s">
+          <div class="work-media" style="--hue:15"><span class="work-initials">BW</span><span class="work-result"><strong>0</strong> plugins to babysit</span></div>
+          <div class="work-body">
+            <p class="work-client">Benjamin J. Wood · Author</p>
+            <h3>An author site that updates itself when a new book ships</h3>
+            <p>Books, events and press are simple entries in the dashboard. No page builder, no monthly “maintenance” invoice.</p>
+            <ul class="chips"><li>WordPress</li><li>ACF</li><li>Launchpad</li></ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TESTIMONIALS ===================== -->
+  <section class="section testimonials" id="testimonials">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2 class="h2 split">What clients say <span class="hl hl--cyan">once they have the keys.</span></h2>
+      </div>
+      <!-- PLACEHOLDER QUOTES: swap in real client testimonials before launch. -->
+      <div class="quote-grid">
+        <figure class="quote reveal">
+          <div class="stars" aria-label="5 stars">★★★★★</div>
+          <blockquote><p>“I changed our assembly prices myself the night before a school called. Ten years with the old site and I never once touched it.”</p></blockquote>
+          <figcaption><span class="quote-avatar">S</span><span><strong>Owner</strong><em>School assembly company</em></span></figcaption>
+        </figure>
+        <figure class="quote reveal" style="--d:.12s">
+          <div class="stars" aria-label="5 stars">★★★★★</div>
+          <blockquote><p>“They explained everything in normal words, built it fast, and then actually gave me the passwords. Nobody has ever done that.”</p></blockquote>
+          <figcaption><span class="quote-avatar quote-avatar--cyan">R</span><span><strong>Performer</strong><em>Live entertainment</em></span></figcaption>
+        </figure>
+        <figure class="quote reveal" style="--d:.24s">
+          <div class="stars" aria-label="5 stars">★★★★★</div>
+          <blockquote><p>“The training video is thirty minutes long and I've never needed to call. That's the whole review.”</p></blockquote>
+          <figcaption><span class="quote-avatar quote-avatar--coral">B</span><span><strong>Author</strong><em>Independent publisher</em></span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FAQ ===================== -->
+  <section class="section faq" id="faq">
+    <div class="wrap narrow">
+      <div class="section-head reveal">
+        <p class="eyebrow">FAQ</p>
+        <h2 class="h2 split">Questions people <span class="hl">actually ask.</span></h2>
+      </div>
+      <div class="accordion">
+        <details class="acc reveal" open><summary><span>Do I really own everything?</span><svg class="icon" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></summary><div class="acc-body"><p>Yes. The domain, hosting account and WordPress install are registered in your name with your card. We get a login from you — not the other way round. When the project ends, remove our user and everything keeps working.</p></div></details>
+        <details class="acc reveal" style="--d:.06s"><summary><span>What is ACF and why should I care?</span><svg class="icon" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></summary><div class="acc-body"><p>Advanced Custom Fields turns each editable part of your site into a labelled box in your dashboard: “Headline”, “Opening hours”, “Hero photo”. You change the text, hit Update, and the design stays intact. No page builders, no accidental layout breakage.</p></div></details>
+        <details class="acc reveal" style="--d:.12s"><summary><span>Can you refresh my existing site instead of starting over?</span><svg class="icon" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></summary><div class="acc-body"><p>Usually — and it's often the smarter choice. We keep your domain, content and search rankings, rebuild the front end, and redirect every old link. A modern site without starting from zero.</p></div></details>
+        <details class="acc reveal" style="--d:.18s"><summary><span>What happens after launch?</span><svg class="icon" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></summary><div class="acc-body"><p>You get a recorded walkthrough, a cheat sheet, and an hour of hands-on training. After that most clients never need us — but we're a message away if you want new features.</p></div></details>
+        <details class="acc reveal" style="--d:.24s"><summary><span>Is there a monthly fee?</span><svg class="icon" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></summary><div class="acc-body"><p>Not to us. You pay your own hosting and domain (typically $10–25 a month, to the provider, in your name). Optional care plans exist if you'd rather we handle updates.</p></div></details>
+        <details class="acc reveal" style="--d:.3s"><summary><span>How long does it take?</span><svg class="icon" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></summary><div class="acc-body"><p>Launchpad sites go live in two to three weeks. Accelerator and Supernova builds typically take four to eight weeks depending on integrations.</p></div></details>
+        <details class="acc reveal" style="--d:.36s"><summary><span>Why not just use Wix, Squarespace or an AI site builder?</span><svg class="icon" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></summary><div class="acc-body"><p>They're fine for a weekend project. For a business they cost more over time, load slowly because of the scripts they bundle, look like every other site on the same template, and can't be moved — stop paying and it's gone. A NerdVision build is fast, yours outright, and portable to any developer. If you're on one now, we migrate it with your rankings intact.</p></div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CONTACT ===================== -->
+  <section class="section contact" id="contact">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div class="contact-copy">
+          <div class="section-head section-head--left reveal">
+            <p class="eyebrow">Free site review</p>
+            <h2 class="h2 split">Send us your URL. <span class="hl hl--cyan">We'll tell you the truth.</span></h2>
+            <p class="lead">Within a business day you'll get a short, jargon-free video: what's holding your site back, what we'd change, and what it would cost. No pressure, no retainer talk.</p>
+          </div>
+          <ul class="contact-details reveal">
+            <li><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><a href="mailto:hello@nerdvision.tech">hello@nerdvision.tech</a></li>
+            <li><svg class="icon" viewBox="0 0 24 24"><path d="M12 22s7-7 7-12a7 7 0 10-14 0c0 5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Working with businesses across the US, remotely and in person.</span></li>
+          </ul>
+          <div class="contact-badge reveal">
+            <img src="assets/img/icon.png" alt="" width="64" height="80">
+            <p>You'll talk to the people who build the site. No sales team, no account managers.</p>
+          </div>
+        </div>
+
+        <div class="contact-form-wrap reveal" style="--d:.15s">
+          <!-- Point data-endpoint at a Formspree / Basin / Netlify Forms URL to go live. Left empty, the form shows a demo confirmation. -->
+          <form class="contact-form" id="enquiry" method="post" data-endpoint="">
+            <p class="hp" aria-hidden="true"><label>Company URL <input type="text" name="company_url" tabindex="-1" autocomplete="off"></label></p>
+            <div class="form-grid">
+              <div class="field field--half"><label for="f-name">Your name <span class="req">*</span></label><input id="f-name" name="name" type="text" required autocomplete="name"></div>
+              <div class="field field--half"><label for="f-business">Business name</label><input id="f-business" name="business" type="text" autocomplete="organization"></div>
+              <div class="field field--half"><label for="f-email">Email <span class="req">*</span></label><input id="f-email" name="email" type="email" required autocomplete="email"></div>
+              <div class="field field--half"><label for="f-website">Current website</label><input id="f-website" name="website" type="url" placeholder="https://"><small>We love a good before-and-after.</small></div>
+              <div class="field"><label for="f-package">What are you thinking?</label>
+                <select id="f-package" name="package">
+                  <option>Not sure yet</option><option>Refresh my existing site</option><option>Launchpad</option><option>Accelerator</option><option>Supernova</option><option>Something else</option>
+                </select>
+              </div>
+              <div class="field"><label for="f-message">Tell us about the project <span class="req">*</span></label><textarea id="f-message" name="message" rows="5" required></textarea><small>What isn't working today, and what would “done” look like?</small></div>
+            </div>
+            <button type="submit" class="btn btn--primary btn--lg"><span>Send it over</span><svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+            <div class="form-status" role="status" hidden></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <img src="assets/img/icon.png" alt="" width="72" height="90" class="footer-icon">
+      <p class="footer-tagline">Websites you own, understand, and can actually edit.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer">
+      <ul class="nav-list">
+        <li><a href="#refresh">Refresh</a></li><li><a href="#ownership">Ownership</a></li><li><a href="#packages">Packages</a></li><li><a href="#work">Work</a></li><li><a href="#faq">FAQ</a></li><li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="footer-contact"><a href="mailto:hello@nerdvision.tech">hello@nerdvision.tech</a></div>
+  </div>
+  <div class="wrap footer-note">
+    <p>&copy; <span data-year>2026</span> NerdVision. Hand-coded, no page builders were harmed.</p>
+    <a href="#top" class="to-top">Back to top &uarr;</a>
+  </div>
+</footer>
+
+<script src="scripts.js" defer></script>
 </body>
 </html>
