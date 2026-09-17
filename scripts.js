@@ -253,7 +253,7 @@
         show('Got it! We read every message ourselves and will reply within one business day.');
         form.reset();
       } catch {
-        show('Something went wrong sending that. Email us directly at hello@nerdvision.tech and we will sort it out.', true);
+        show('Something went wrong sending that. Email us directly at frediegarcia@nerdvision.tech and we will sort it out.', true);
       } finally {
         btn.disabled = false;
       }
