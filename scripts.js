@@ -260,6 +260,13 @@
     });
   }
 
+  /* ---------- work before/after toggle ---------- */
+  $$('.work-ba').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      btn.setAttribute('aria-pressed', btn.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
+    });
+  });
+
   /* ---------- footer year ---------- */
   $$('[data-year]').forEach((el) => { el.textContent = new Date().getFullYear(); });
 })();
