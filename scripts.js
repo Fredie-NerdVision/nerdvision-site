@@ -267,6 +267,24 @@
     });
   });
 
+  /* ---------- social: mock content calendar ---------- */
+  const cal = $('[data-calendar]');
+  if (cal) {
+    const days = $$('button.cal-day', cal);
+    const chip = $('.cal-preview-chip', cal);
+    const out = $('[data-caption-out]', cal);
+    const names = { ig: 'Instagram', fb: 'Facebook', gbp: 'Google Business', li: 'LinkedIn' };
+    days.forEach((d, i) => {
+      d.style.setProperty('--i', i);
+      d.addEventListener('click', () => {
+        days.forEach((o) => o.setAttribute('aria-pressed', o === d ? 'true' : 'false'));
+        chip.dataset.platform = d.dataset.platform;
+        chip.textContent = names[d.dataset.platform] || '';
+        out.textContent = d.dataset.caption;
+      });
+    });
+  }
+
   /* ---------- footer year ---------- */
   $$('[data-year]').forEach((el) => { el.textContent = new Date().getFullYear(); });
 })();
